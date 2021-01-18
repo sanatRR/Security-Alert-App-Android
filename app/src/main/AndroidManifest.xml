@@ -13,20 +13,22 @@
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <service android:name=".SecurityService"/>
         
-        <receiver android:name=".loginWatch">
-            android:permission="android.permission.BIND_DEVICE_ADMIN"
+        <receiver android:name="com.example.android.hawk.loginWatch"
+            android:permission="android.permission.BIND_DEVICE_ADMIN">
             <meta-data android:name="android.app.device_admin"
                 android:resource="@xml/policies" />
             <intent-filter>
                 <action android:name="android.app.action.DEVICE_ADMIN_ENABLED"/>
+                <action android:name="android.app.action.ACTION_PASSWORD_FAILED"/>
             </intent-filter>
         </receiver>
+
     </application>
 
 </manifest>
