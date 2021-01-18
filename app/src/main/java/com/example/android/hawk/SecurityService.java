@@ -18,9 +18,11 @@ import androidx.core.app.NotificationCompat;
 
 public class SecurityService extends Service {
     static boolean serviceRunning;
+    static int failedPasswordCount;
 
     static{
         serviceRunning=false;
+        failedPasswordCount=0;
     }
 
     @Nullable
