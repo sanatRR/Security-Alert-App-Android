@@ -42,7 +42,7 @@ public class SecurityService extends Service {
         Notification notification=new NotificationCompat.Builder(this,"SecurityApp").setContentTitle("Hawk")
                 .setContentText("Theft-Alert Running").setSmallIcon(R.mipmap.ic_launcher).setContentIntent(pendingIntent).build();
         //Primary Code Begins here
-
+        new loginWatch();
         //Primary Code Ends here
         startForeground(1,notification);
         return START_STICKY;

@@ -19,6 +19,8 @@ import android.view.View;
 import android.widget.CheckBox;
 import android.widget.Toast;
 
+import com.mailjet.client.Main;
+
 public class MainActivity extends AppCompatActivity {
     private CheckBox adminEnabled;
     private DevicePolicyManager devicePolicyManager;
@@ -37,7 +39,8 @@ public class MainActivity extends AppCompatActivity {
         else if(isAdminActive && !adminEnabled.isChecked()){
             adminEnabled.toggle();
         }
-        //Prompt User To Enable Admin privilege
+        else if(!isAdminActive)
+            Toast.makeText(MainActivity.this,"Admin Privilege Needed",Toast.LENGTH_SHORT).show();
     }
 
     @RequiresApi(api = Build.VERSION_CODES.O) //Requires minimum Oreo
@@ -57,10 +60,19 @@ public class MainActivity extends AppCompatActivity {
         adminEnabled.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(DevicePolicyManager.ACTION_ADD_DEVICE_ADMIN);
-                intent.putExtra(DevicePolicyManager.EXTRA_DEVICE_ADMIN, compName);
-                intent.putExtra(DevicePolicyManager.EXTRA_ADD_EXPLANATION, "Admin Access Needed To Check If Incorrect PIN Entered");
-                startActivityForResult(intent,3 );  //request code 3
+               if(!isAdminActive){
+                   Intent intent = new Intent(DevicePolicyManager.ACTION_ADD_DEVICE_ADMIN);
+                   intent.putExtra(DevicePolicyManager.EXTRA_DEVICE_ADMIN, compName);
+                   intent.putExtra(DevicePolicyManager.EXTRA_ADD_EXPLANATION, "Admin Access Needed To Check If Incorrect PIN Entered");
+                   startActivityForResult(intent,3 );  //request code 3
+                   isAdminActive = devicePolicyManager.isAdminActive(compName);
+               }
+               else
+               {
+                   devicePolicyManager.removeActiveAdmin(compName);
+                   isAdminActive = false;
+                   Toast.makeText(MainActivity.this,"Admin Privilege Revoked",Toast.LENGTH_SHORT).show();
+               }
             }
         });
     }
