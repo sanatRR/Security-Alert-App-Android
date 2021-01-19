@@ -22,7 +22,7 @@ public class SecurityService extends Service {
 
     static{
         serviceRunning=false;
-        failedPasswordCount=0;
+        failedPasswordCount=2;  //set this to 2, 2++ = 3 and 3%3=0, pic taken
     }
 
     @Nullable

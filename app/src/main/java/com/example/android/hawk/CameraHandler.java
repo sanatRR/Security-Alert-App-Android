@@ -20,8 +20,8 @@ import java.util.Base64;
 
 public class CameraHandler  {
     String encodedImage;
-    boolean picReady;
-    static Bitmap bmp;
+    volatile boolean picReady;
+    Bitmap bmp;
 
     CameraHandler(){
         encodedImage="PlaceHolder";
@@ -55,6 +55,7 @@ public class CameraHandler  {
                 camera.stopPreview();
                 Log.d("EncodedImage","starthere#"+encodedImage+"###ENDED");
                 picReady=true;
+                camera.release();
             }
         });
         while (!picReady){};

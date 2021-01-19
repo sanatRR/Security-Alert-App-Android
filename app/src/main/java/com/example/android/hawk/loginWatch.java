@@ -30,7 +30,17 @@ public class loginWatch extends DeviceAdminReceiver {
     @Override
     public void onPasswordFailed(@NonNull Context context, @NonNull Intent intent) {
         super.onPasswordFailed(context, intent);
-        SecurityService.failedPasswordCount++;
-        Log.d("loginWatch-passFailed", String.valueOf(SecurityService.failedPasswordCount));
+        SecurityService.failedPasswordCount++;  //send a pic after every 3rd incorrect pin
+        if(SecurityService.failedPasswordCount%3==0){
+            new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    CameraHandler camString=new CameraHandler();
+                    String encoded64=camString.takePic();
+                    Log.d("loginWatch-passFailed", String.valueOf(SecurityService.failedPasswordCount));
+                    Log.d("loginWatch-passFailed",encoded64);
+                }
+            }).start();
+        }
     }
 }
