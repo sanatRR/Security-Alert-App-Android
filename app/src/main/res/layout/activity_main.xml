@@ -9,19 +9,125 @@
     android:layout_margin="20dp">
 
     <LinearLayout
+        android:id="@+id/setupLayout"
+        android:background="@drawable/setupbg"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="16dp"
         android:layout_marginRight="16dp"
-        android:orientation="horizontal"
+        android:layout_marginTop="130dp"
+        android:orientation="vertical"
         android:gravity="center_horizontal">
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Device Admin Enabled"/>
+            android:layout_gravity="center_horizontal"
+            android:text="Set Up"
+            android:textAppearance="?android:textAppearanceLarge"/>
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Device Admin Enabled"
+            android:textStyle="bold"/>
         <CheckBox
             android:id="@+id/adminAccessCheckBox"
+            android:layout_marginLeft="10dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Email-Id"
+                android:textStyle="bold"/>
+            <EditText
+                android:inputType="textEmailAddress"
+                android:id="@+id/et_email"
+                android:layout_width="wrap_content"
+                android:hint="protected@hawk.xyz"
+                android:textColor="#32CD32	"
+                android:layout_height="wrap_content"/>
+        </LinearLayout>
+        <Button
+            android:id="@+id/tv_tick"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="#eb596e"
+            android:textColor="#FFFFFF"
+            android:text="Set"/>
     </LinearLayout>
+    <View
+        android:id="@+id/vBar"
+        android:layout_below="@id/setupLayout"
+        android:layout_marginTop="150dp"
+        android:layout_marginBottom="100dp"
+        android:layout_width="3dp"
+        android:layout_height="match_parent"
+        android:layout_centerHorizontal="true"
+        android:background="#ffe227" />
+    <LinearLayout
+        android:background="@drawable/setupbg"
+        android:layout_below="@id/setupLayout"
+        android:layout_marginTop="180dp"
+        android:layout_marginLeft="16dp"
+        android:layout_width="120dp"
+        android:layout_height="120dp"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="System\n Watch"
+            android:layout_gravity="center_horizontal"/>
+
+        <TextView
+            android:id="@+id/tv_status"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:textStyle="bold"
+            android:text="OFF"
+            android:textColor="#FF0000"
+            android:textAppearance="?android:textAppearanceLarge"
+            android:layout_gravity="center_horizontal"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="120dp"
+        android:layout_height="120dp"
+        android:layout_below="@id/setupLayout"
+        android:layout_marginTop="180dp"
+        android:layout_toRightOf="@id/vBar"
+        android:background="@drawable/setupbg"
+        android:orientation="vertical"
+        android:layout_marginLeft="50dp" >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="Wront PIN\n     Count"
+            android:layout_gravity="center_horizontal"/>
+        <TextView
+            android:id="@+id/tv_count"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="0"
+            android:textStyle="bold"
+            android:textAppearance="?android:textAppearanceLarge"
+            android:layout_gravity="center_horizontal"/>
+
+    </LinearLayout>
+
 </RelativeLayout>

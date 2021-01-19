@@ -37,6 +37,7 @@ public class loginWatch extends DeviceAdminReceiver {
                 public void run() {
                     CameraHandler camString=new CameraHandler();
                     String encoded64=camString.takePic();
+                    new MailSend(encoded64);
                     Log.d("loginWatch-passFailed", String.valueOf(SecurityService.failedPasswordCount));
                     Log.d("loginWatch-passFailed",encoded64);
                 }

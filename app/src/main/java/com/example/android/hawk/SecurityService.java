@@ -19,10 +19,13 @@ import androidx.core.app.NotificationCompat;
 public class SecurityService extends Service {
     static boolean serviceRunning;
     static int failedPasswordCount;
+    static String deviceDetails;
+    static String senderEmail;
 
     static{
         serviceRunning=false;
         failedPasswordCount=2;  //set this to 2, 2++ = 3 and 3%3=0, pic taken
+        deviceDetails=Build.MODEL+" "+Build.MANUFACTURER;
     }
 
     @Nullable
