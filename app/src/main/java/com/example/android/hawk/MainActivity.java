@@ -15,8 +15,11 @@ import android.content.ComponentName;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.mailjet.client.Main;
@@ -50,12 +53,13 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         adminEnabled=findViewById(R.id.adminAccessCheckBox);
         devicePolicyManager = (DevicePolicyManager) getSystemService(DEVICE_POLICY_SERVICE);
-     //   activityManager=(ActivityManager)getSystemService(ACTIVITY_SERVICE);
         compName = new ComponentName(this,loginWatch.class);
 
         if(!SecurityService.serviceRunning){
             startForegroundService(new Intent(MainActivity.this,SecurityService.class));
         }
+
+
 
         adminEnabled.setOnClickListener(new View.OnClickListener() {
             @Override
