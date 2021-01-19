@@ -5,7 +5,6 @@ package com.example.android.hawk;
  * loginWatch class, handle enabling and disabling of security Policies
  * by the user
  */
-
 import android.app.admin.DeviceAdminReceiver;
 import android.content.Context;
 import android.content.Intent;
