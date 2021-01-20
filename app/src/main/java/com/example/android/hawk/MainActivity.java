@@ -33,7 +33,7 @@ import org.w3c.dom.Text;
 public class MainActivity extends AppCompatActivity {
     private CheckBox adminEnabled;
     private DevicePolicyManager devicePolicyManager;
-    private TextView statusTV,countTV;
+    private TextView statusTV,countTV,reset;
     private EditText emailET;
     private Button tickIV;
     private ComponentName compName;
@@ -74,6 +74,7 @@ public class MainActivity extends AppCompatActivity {
         tickIV=findViewById(R.id.tv_tick);
         statusTV=findViewById(R.id.tv_status);
         countTV=findViewById(R.id.tv_count);
+        reset=findViewById(R.id.tv_Reset);
         devicePolicyManager = (DevicePolicyManager) getSystemService(DEVICE_POLICY_SERVICE);
         compName = new ComponentName(this,loginWatch.class);
 
@@ -85,6 +86,16 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 SecurityService.senderEmail=emailET.getText().toString();
+                emailET.setHint(SecurityService.senderEmail);
+                Toast.makeText(MainActivity.this,"Email Set:"+SecurityService.senderEmail,Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        reset.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                SecurityService.failedPasswordCount=0;
+                countTV.setText(String.valueOf(0));
             }
         });
 

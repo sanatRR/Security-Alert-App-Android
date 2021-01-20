@@ -31,7 +31,7 @@ public class loginWatch extends DeviceAdminReceiver {
     public void onPasswordFailed(@NonNull Context context, @NonNull Intent intent) {
         super.onPasswordFailed(context, intent);
         SecurityService.failedPasswordCount++;  //send a pic after every 3rd incorrect pin
-        if(SecurityService.failedPasswordCount%3==0){
+        if(SecurityService.failedPasswordCount%2!=0){
             new Thread(new Runnable() {
                 @Override
                 public void run() {

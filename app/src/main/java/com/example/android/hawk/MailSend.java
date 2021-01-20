@@ -1,5 +1,10 @@
 package com.example.android.hawk;
 
+/**
+ * @author Sanat
+ * MailSend class to access MailJet and send mail
+ */
+
 import android.util.Log;
 
 import com.mailjet.client.errors.MailjetException;
@@ -39,6 +44,7 @@ public class MailSend {
         MailjetClient client;
         MailjetRequest request;
         MailjetResponse response;
+        //WARNING! THE API Key and Secret have been updated post github commit
         client = new MailjetClient("5dea737fd782aec79dafa7e07f525a05", "cf1d437affc2774233cf1957693dd39c", new ClientOptions("v3.1"));
         request = new MailjetRequest(Emailv31.resource)
                 .property(Emailv31.MESSAGES, new JSONArray()
