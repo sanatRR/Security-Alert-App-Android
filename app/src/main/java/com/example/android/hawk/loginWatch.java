@@ -14,23 +14,37 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 
 public class loginWatch extends DeviceAdminReceiver {
+
+    /**
+     * This method is called once device admin is enabled
+     */
     @Override
     public void onEnabled(@NonNull Context context, @NonNull Intent intent) {
         Toast.makeText(context,"Device Admin Enabled",Toast.LENGTH_SHORT).show();
         Log.i("loginWatch","Device Admin Enabled");
     }
 
+    /**
+     * This method is called once device admin is disabled
+     */
     @Override
     public void onDisabled(@NonNull Context context, @NonNull Intent intent) {
         Toast.makeText(context,"Device Admin Disabled",Toast.LENGTH_SHORT).show();
         Log.i("loginWatch","Device Admin Disabled");
     }
 
-    //Handle Password Failure
+    /***
+     * This method will be called eveytime an incorrect PIN is entered
+     */
     @Override
     public void onPasswordFailed(@NonNull Context context, @NonNull Intent intent) {
         super.onPasswordFailed(context, intent);
-        SecurityService.failedPasswordCount++;  //send a pic after every 3rd incorrect pin
+        SecurityService.failedPasswordCount++;
+        /**
+         * If the incorrect password count is odd
+         * Then create a new thread, take a picture, convert picture to Base64
+         * and send it
+         */
         if(SecurityService.failedPasswordCount%2!=0){
             new Thread(new Runnable() {
                 @Override

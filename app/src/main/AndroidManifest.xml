@@ -15,16 +15,20 @@
         android:theme="@style/Theme.Hawk">
         <activity android:name=".MainActivity">
             <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
+                <action android:name="android.intent.action.MAIN" />  <!-- Entry point of the application-->
+                <category android:name="android.intent.category.LAUNCHER" /> <!--Place this activity in launcher category, will have an icon-->
             </intent-filter>
         </activity>
 
         <service android:name=".SecurityService"/>
-        
-        <receiver android:name="com.example.android.hawk.loginWatch"
-            android:permission="android.permission.BIND_DEVICE_ADMIN">
-            <meta-data android:name="android.app.device_admin"
+
+        <!-- The loginWatch class extends BroadcastReceiver class -->
+        <receiver
+            android:name="com.example.android.hawk.loginWatch"
+            android:permission="android.permission.BIND_DEVICE_ADMIN"> <!-- This pevents other apps from misuing the receiver, ensures only system interacts with receiver -->
+            <!-- The meta-data contains the policies-->
+            <meta-data
+                android:name="android.app.device_admin"
                 android:resource="@xml/policies" />
             <intent-filter>
                 <action android:name="android.app.action.DEVICE_ADMIN_ENABLED"/>

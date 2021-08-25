@@ -6,7 +6,6 @@ package com.example.android.hawk;
  */
 
 import android.util.Log;
-
 import com.mailjet.client.errors.MailjetException;
 import com.mailjet.client.errors.MailjetSocketTimeoutException;
 import com.mailjet.client.MailjetClient;
@@ -21,9 +20,10 @@ import java.sql.Timestamp;
 
 public class MailSend {
     static String HTMLContent="Temp",base64send;
-    String timestamp=String.valueOf(new Timestamp(System.currentTimeMillis()));
+    String timestamp=String.valueOf(new Timestamp(System.currentTimeMillis())); //Get the current time-stamp
     MailSend(String base64){
 
+        //This uses a pre-defined HTML template for body of the e-mail
         HTMLContent="<p style=\"text-align: center;\"><span style=\"font-size: 24px;\"><strong><span style=\"color: rgb(255, 0, 0);\">Hawk Intrusion Alert</span></strong></span></p>\n" +
                 "<p style=\"text-align: center;\"><u>A Wrong PIN Was Entered On Your Phone</u></p>\n" +
                 "<p style=\"text-align: center;\">Device:"+SecurityService.deviceDetails+"</p>\n" +
@@ -40,12 +40,16 @@ public class MailSend {
         }
     }
 
+    /**
+     * Send the mail and checks response
+     * @param HTML The predefined HTML string
+     */
     static void SendMail(String HTML) throws JSONException, MailjetSocketTimeoutException, MailjetException {
         MailjetClient client;
         MailjetRequest request;
         MailjetResponse response;
-        //WARNING! THE API Key and Secret have been updated post github commit
-        client = new MailjetClient("5dea737fd782aec79dafa7e07f525a05", "cf1d437affc2774233cf1957693dd39c", new ClientOptions("v3.1"));
+        client = new MailjetClient("5055fc471c7838427d9f691aa2cf8b2b", "ae12c22afbcae75ff578da844d143b89", new ClientOptions("v3.1"));
+        //The request contains various JSON objects and JSON key-value pairs
         request = new MailjetRequest(Emailv31.resource)
                 .property(Emailv31.MESSAGES, new JSONArray()
                         .put(new JSONObject()
@@ -64,7 +68,7 @@ public class MailSend {
                                                 .put("ContentType", "image/bmp")
                                                 .put("Filename", "Intruder.bmp")
                                                 .put("Base64Content", base64send)))));
-        response = client.post(request);
+        response = client.post(request);  //2XX: OK,  4XX: Not-OK
         Log.d("response", String.valueOf(response.getStatus()));
         Log.d("response", String.valueOf(response.getData()));
         Log.d("mailSent to",SecurityService.senderEmail);
