@@ -48,7 +48,7 @@ public class MailSend {
         MailjetClient client;
         MailjetRequest request;
         MailjetResponse response;
-        client = new MailjetClient("5055fc471c7838427d9f691aa2cf8b2b", "ae12c22afbcae75ff578da844d143b89", new ClientOptions("v3.1"));
+        client = new MailjetClient("5055fc471c7838427d9f691aa2cf8b2b", "ENTER SECRET!", new ClientOptions("v3.1"));
         //The request contains various JSON objects and JSON key-value pairs
         request = new MailjetRequest(Emailv31.resource)
                 .property(Emailv31.MESSAGES, new JSONArray()
